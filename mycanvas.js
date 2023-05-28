@@ -4,6 +4,7 @@ let titleDate = nowDate.getFullYear()+'年'+(nowDate.getMonth()+1)+'月'+nowDate
 let customer = '顾客名称：'
 let titleKey = '0000001'
 
+
 function canvasMoney(money){
     money = money.toString(); //转换为字符串
     //如果没有小数  
@@ -61,18 +62,23 @@ function draw(){
     //读取数据
     let todoarr = load('newbill');
     let sum = {a:0,b:''};
+    // ccs中canvas的高
     let canvasHeight = 175+todoarr.length*25;
 
     let canvas = document.getElementById('tutorial');
     if (!canvas.getContext) return;
     let ctx = canvas.getContext("2d");
-
+    let headerHeight = 160;
+    // 实际canvas的高宽不能改 只能让css适应浏览器宽高
     canvas.height = 2*canvasHeight;
-    canvas.style.height = canvasHeight+'px';
+    canvas.style.height = window.innerWidth/600*canvasHeight+'px';//为什么不加px会有诡异的现象
+    canvas.style.width = window.innerWidth+'px'; 
 
+    ctx.fillStyle = "rgba(255, 255, 255, 1)";    
+    ctx.fillRect(0,0,canvas.width,canvas.height)
+    ctx.fillStyle = "black";
    
     //先画个表头
-    let headerHeight = 160;
     ctx.textBaseline = 'top';
     ctx.textAlign = 'start' ;
     ctx.font = "48px sans-serif "
@@ -124,7 +130,6 @@ function draw(){
    
     //表头内容
     tableContentHeight=15+headerHeight;
-let dataHeader = ['品名及规格','单位','数量','单价','金额','备注'];
     ctx.font = "29px sans-serif"
     ctx.fillText('品名及规格',170,tableContentHeight)
     ctx.fillText('单位',410,tableContentHeight)
@@ -144,12 +149,12 @@ let dataHeader = ['品名及规格','单位','数量','单价','金额','备注'
         ctx.fillStyle = "black";
         ctx.font = "23px sans-serif";
         upTable(ctx,headerHeight+i*50+50)
-        ctx.fillText(todoarr[i].name,102,tableContentHeight+i*50+50 )
+        ctx.fillText(todoarr[i].name,105,tableContentHeight+i*50+50 )
         ctx.textAlign ='center';
-        ctx.fillText(todoarr[i].danwei,435,tableContentHeight+i*50+50 )
+        ctx.fillText(todoarr[i].danwei,440,tableContentHeight+i*50+50 )
         ctx.fillText(todoarr[i].num,530,tableContentHeight+i*50+50)
         ctx.fillText(todoarr[i].price,650,tableContentHeight+i*50+50)
-        ctx.fillText(todoarr[i].note,980 ,tableContentHeight+i*50+50)
+        ctx.fillText(todoarr[i].note,990,tableContentHeight+i*50+50)
         ctx.font = "20px sans-serif ";
         ctx.textAlign ='start';
 
@@ -163,10 +168,10 @@ let dataHeader = ['品名及规格','单位','数量','单价','金额','备注'
         let a =tableMoney.length
         for(j=0;j<a;j++){
             //倒序插入数字
-            ctx.fillText(tableMoney[a-j-1],929-j*25,tableContentHeight+i*50+50)
+            ctx.fillText(tableMoney[a-j-1],930-j*25,tableContentHeight+i*50+50)
             }
 
-    }
+        }
    sum.b=changeNumMoneyToChinese(sum.a);
 
     //封底
@@ -185,4 +190,32 @@ let dataHeader = ['品名及规格','单位','数量','单价','金额','备注'
     ctx.fillText('开票人 谢',780,headerHeight+(todoarr.length)*50+110)
 
 }
-draw()
+function drawOrBack(){
+    
+    if ($("#btCanvas").text()=="开票") {
+        $("#btCanvas").text("返回")
+        $("#billTable").css("display","none")
+        $("#billTable").after(' <canvas id="tutorial" width="1200px" height="600px" style=" width: 600px; height: 300px;  " >暂不支持</canvas>');
+        draw()
+        // $("#tutorial").after('<a href="#bill"  class="ui-btn" id = "savecanvas" onclick = "saveCanvas(tutorial) ">保存</a>')
+       
+    } else  {
+        $("#btCanvas").text("开票")
+        $("#billTable").css("display","block")
+        $("#tutorial").remove()
+        // $("savecanvas").remove()
+        
+    }
+    //canvas 一旦display=none，就无法恢复了吗？
+}
+
+// 保存单据
+function saveCanvas(name){
+    let image = new Image();
+    var tCanvas = document.getElementById(name);
+    ctx = tCanvas.getContext('2d')
+    image.src = ctx.toDataURL("image/jpeg");
+    // let url = image.src.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+    // window.open(url);
+    console.log(image.src);
+}

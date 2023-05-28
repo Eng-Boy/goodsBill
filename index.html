@@ -3,6 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="./main/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet" href="style.css">
 <script src="./main/jquery-1.11.3.min.js"></script>
 <script src="./main/jquery.mobile-1.4.5.min.js"></script>
 </head>
@@ -31,98 +32,95 @@
         <div data-role="header">
           <h1>新建票据</h1>
         </div>
-      
-        <div data-role="main" class="ui-content" >
-          
-          <div data-role="popup" id="newBill" data-dismissible="false">
-            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-left">关闭</a>
-
-            <input type="text" placeholder="型号" list="xinghao" >
-            <input max="2" type="text" placeholder="单位" list="danwei"> 
-            <input max="4" min="1" type="number" placeholder="数量">
-            <input max="3" min="0.01" type="number" placeholder="单价" >
-            <input type="text"placeholder="想告诉客户什么">
-            <button onclick="btadd()">添加</button>
-
-            <datalist id="danwei"> 
-              <option>个</option>
-              <option>桶</option>
-              <option>条</option>
-              <option>把</option>
-              <option>盒</option> 
-              <option>件</option> 
-              <option>卷</option> 
-              <option>包</option> 
-              <option>颗</option> 
-            </datalist> 
-            <datalist id="xinghao"> 
-              <option>750/825R16艾卡垫带</option>
-              <option>900/1000R20艾卡垫带</option>
-              <option>1100/1200R20艾卡垫带</option>
-              <option>1100/1200R20加厚艾卡垫带</option>
-              <option>700/650R16艾卡垫带</option>
-              <option>1100/1200R20安基垫带</option>
-              <option>900/1000R20安基垫带</option>
-              <option>900/1000R20胎垫</option>
-              <option>1100/1200R20胎垫</option>
-              <option>750/825R16胎垫</option>
-              <option>1200R20丁基内胎</option>
-              <option>1100R20丁基内胎</option>
-              <option>1000R20丁基内胎</option>
-              <option>900R20丁基内胎</option>
-              <option>825R20丁基内胎</option>
-              <option>825R16丁基内胎</option>
-              <option>750R16丁基内胎</option>
-              <option>900/1000R20丁基内胎</option>
-              <option>750/825R16丁基内胎</option>
-              <option>700/650R16丁基内胎</option> 
-              <option>650/600R15丁基内胎</option> 
-            </datalist> 
-          </div>
-
-          <div data-role="popup" id="billCanvas" class="ui-content">
-            <canvas id="tutorial" width="1200px" height="600px" style="background: white; width: 600px; height: 300px;">
-              暂不支持
-              </canvas>
-          </div>
-            
-          <table data-role="table" class="ui-responsive" data-mode="columntoggle" data-column-btn-text="">
-                <thead>
-                    <tr>
-                        <th>序号</th>
-                        <th>型号</th>
-                        <th>单位</th>
-                        <th>数量</th>
-                        <th>单价</th>
-                        <th>金额</th>
-                        <th>备注</th>
-                    </tr>
-                </thead>
-                <tbody id="zihou">
-                </tbody>
-          </table>
-          <a href="#newBill" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all" onclick="einppdel()">新建</a>
     
-          <div class="ui-grid-a">
-                <div class="ui-block-a">
-                    <h3 id="iDaXie">合计:零</h3>
-                </div>
-          
-                <div class="ui-block-b">
-                    <h3 id="isum">￥:0.00</h3>
-                </div>     
-          </div>
+        <datalist id="danwei"> 
+          <option>个</option>
+          <option>桶</option>
+          <option>条</option>
+          <option>把</option>
+          <option>盒</option> 
+          <option>件</option> 
+          <option>卷</option> 
+          <option>包</option> 
+          <option>颗</option> 
+        </datalist> 
+        <datalist id="xinghao"> 
+          <option>750/825R16艾卡垫带</option>
+          <option>900/1000R20艾卡垫带</option>
+          <option>1100/1200R20艾卡垫带</option>
+          <option>1100/1200R20加厚艾卡垫带</option>
+          <option>700/650R16艾卡垫带</option>
+          <option>1100/1200R20安基垫带</option>
+          <option>900/1000R20安基垫带</option>
+          <option>900/1000R20胎垫</option>
+          <option>1100/1200R20胎垫</option>
+          <option>750/825R16胎垫</option>
+          <option>1200R20丁基内胎</option>
+          <option>1100R20丁基内胎</option>
+          <option>1000R20丁基内胎</option>
+          <option>900R20丁基内胎</option>
+          <option>825R20丁基内胎</option>
+          <option>825R16丁基内胎</option>
+          <option>750R16丁基内胎</option>
+          <option>900/1000R20丁基内胎</option>
+          <option>750/825R16丁基内胎</option>
+          <option>700/650R16丁基内胎</option> 
+          <option>650/600R15丁基内胎</option> 
+        </datalist> 
 
-          
-        
-    
-        <div data-role="footer" data-position="fixed">
-          <!-- <a href="#bill"  class="ui-btn  ">返回</a> -->
-          <a href="#"  class="ui-btn" onclick="delBoxAll()">清空</a>
-          <!-- <a href="#bill"  class="ui-btn ">完成</a> -->
-          <a href="#billCanvas" data-rel="popup" class="ui-btn " data-position-to="window" onclick="draw()">开票</a>
+        <div data-role="popup" id="newBill" data-dismissible="false">
+          <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-left">关闭</a>
+
+          <input type="text" placeholder="型号" list="xinghao" >
+          <input max="2" type="text" placeholder="单位" list="danwei"> 
+          <input max="4" min="1" type="number" placeholder="数量">
+          <input max="3" min="0.01" type="number" placeholder="单价" >
+          <input type="text"placeholder="想告诉客户什么">
+          <button onclick="btadd()">添加</button>
         </div>
-      </div> 
+
+        <div data-role="main" class="ui-content" >
+        
+          <div id="billTable">
+            <table data-role="table" class="ui-responsive" data-mode="columntoggle" data-column-btn-text="">
+              <thead>
+                  <tr>
+                      <th>序号</th>
+                      <th>型号</th>
+                      <th>单位</th>
+                      <th>数量</th>
+                      <th>单价</th>
+                      <th>金额</th>
+                      <th>备注</th>
+                  </tr>
+              </thead>
+              <tbody id="zihou">
+              </tbody>
+        </table>
+        <a href="#newBill" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all" onclick="einppdel()">新建</a>
+  
+        <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <h3 id="iDaXie">合计:零</h3>
+              </div>
+        
+              <div class="ui-block-b">
+                  <h3 id="isum">￥:0.00</h3>
+              </div>     
+        </div>
+          </div>        
+        </div> 
+
+
+
+        <div data-role="footer" data-position="fixed">
+        <!-- <a href="#bill"  class="ui-btn  ">返回</a> -->
+        <a href="#"  class="ui-btn" onclick="delBoxAll()">清空</a>
+        <!-- <a href="#bill"  class="ui-btn ">完成</a> -->
+        <a href="#"  class="ui-btn " onclick="drawOrBack()" id="btCanvas">开票</a>
+        </div>
+
+    </div>
 
 </body>
 <script src="./up_china_number.js"></script>
