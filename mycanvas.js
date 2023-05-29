@@ -197,25 +197,30 @@ function drawOrBack(){
         $("#billTable").css("display","none")
         $("#billTable").after(' <canvas id="tutorial" width="1200px" height="600px" style=" width: 600px; height: 300px;  " >暂不支持</canvas>');
         draw()
-        // $("#tutorial").after('<a href="#bill"  class="ui-btn" id = "savecanvas" onclick = "saveCanvas(tutorial) ">保存</a>')
+        $("#tutorial").after('<a href="#bill"  class="ui-btn" id = "screenshot" onclick = "saveCanvas() ">保存</a>')
        
     } else  {
         $("#btCanvas").text("开票")
         $("#billTable").css("display","block")
         $("#tutorial").remove()
-        // $("savecanvas").remove()
+        $("#screenshot").remove()
         
     }
     //canvas 一旦display=none，就无法恢复了吗？
 }
 
 // 保存单据
-function saveCanvas(name){
-    let image = new Image();
-    var tCanvas = document.getElementById(name);
-    ctx = tCanvas.getContext('2d')
-    image.src = ctx.toDataURL("image/jpeg");
-    // let url = image.src.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
-    // window.open(url);
-    console.log(image.src);
-}
+const saveBlob = (blob, fileName) => {
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    const url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = fileName;
+    a.click();
+};
+function saveCanvas(){
+    const canvas = document.querySelector('#tutorial');
+    canvas.toBlob((blob) => {
+        saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
+    });
+};
