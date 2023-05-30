@@ -71,8 +71,8 @@ function draw(){
     let headerHeight = 160;
     // 实际canvas的高宽不能改 只能让css适应浏览器宽高
     canvas.height = 2*canvasHeight;
-    canvas.style.height = window.innerWidth/600*canvasHeight+'px';//为什么不加px会有诡异的现象
-    canvas.style.width = window.innerWidth+'px'; 
+    // canvas.style.height = window.innerWidth/600*canvasHeight+'px';//为什么不加px会有诡异的现象
+    // canvas.style.width = window.innerWidth+'px'; 
 
     ctx.fillStyle = "rgba(255, 255, 255, 1)";    
     ctx.fillRect(0,0,canvas.width,canvas.height)
@@ -188,6 +188,9 @@ function draw(){
     ctx.fillText('单位盖章',100,headerHeight+(todoarr.length)*50+110)
     ctx.fillText('收款人',500,headerHeight+(todoarr.length)*50+110)
     ctx.fillText('开票人 谢',780,headerHeight+(todoarr.length)*50+110)
+    $("#tutorial").after('<img id="imgCanvas" src="' + canvas.toDataURL("image/png") + '" width="'+window.innerWidth+'">')
+    // canvas.style.height = window.innerWidth/600*canvasHeight+'px';//为什么不加px会有诡异的现象
+    // canvas.style.width = window.innerWidth+'px'; 
 
 }
 function drawOrBack(){
@@ -197,13 +200,15 @@ function drawOrBack(){
         $("#billTable").css("display","none")
         $("#billTable").after(' <canvas id="tutorial" width="1200px" height="600px" style=" width: 600px; height: 300px;  " >暂不支持</canvas>');
         draw()
-        $("#tutorial").after('<a href="#bill"  class="ui-btn" id = "screenshot" onclick = "saveCanvas() ">保存</a>')
+        $("#tutorial").css("display","none")
+        $("#btCanvas").after('<a href="#bill"  class="ui-btn" id = "screenshot" onclick = "saveCanvas() ">保存</a>')
        
     } else  {
         $("#btCanvas").text("开票")
         $("#billTable").css("display","block")
         $("#tutorial").remove()
         $("#screenshot").remove()
+        $("#imgCanvas").remove()
         
     }
     //canvas 一旦display=none，就无法恢复了吗？
