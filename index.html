@@ -32,47 +32,51 @@
         <div data-role="header">
           <h1>新建票据</h1>
         </div>
-    
-        <datalist id="danwei"> 
-          <option>个</option>
-          <option>桶</option>
-          <option>条</option>
-          <option>把</option>
-          <option>盒</option> 
-          <option>件</option> 
-          <option>卷</option> 
-          <option>包</option> 
-          <option>颗</option> 
-        </datalist> 
-        <datalist id="xinghao"> 
-          <option>750/825R16艾卡垫带</option>
-          <option>900/1000R20艾卡垫带</option>
-          <option>1100/1200R20艾卡垫带</option>
-          <option>1100/1200R20加厚艾卡垫带</option>
-          <option>700/650R16艾卡垫带</option>
-          <option>1100/1200R20安基垫带</option>
-          <option>900/1000R20安基垫带</option>
-          <option>900/1000R20胎垫</option>
-          <option>1100/1200R20胎垫</option>
-          <option>750/825R16胎垫</option>
-          <option>1200R20丁基内胎</option>
-          <option>1100R20丁基内胎</option>
-          <option>1000R20丁基内胎</option>
-          <option>900R20丁基内胎</option>
-          <option>825R20丁基内胎</option>
-          <option>825R16丁基内胎</option>
-          <option>750R16丁基内胎</option>
-          <option>900/1000R20丁基内胎</option>
-          <option>750/825R16丁基内胎</option>
-          <option>700/650R16丁基内胎</option> 
-          <option>650/600R15丁基内胎</option> 
-        </datalist> 
 
         <div data-role="popup" id="newBill" data-dismissible="false">
+          
+          
           <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-left">关闭</a>
 
           <input type="text" placeholder="型号" list="xinghao" >
+          <datalist id="xinghao"> 
+            <option>750/825R16艾卡垫带</option>
+            <option>900/1000R20艾卡垫带</option>
+            <option>1100/1200R20艾卡垫带</option>
+            <option>1100/1200R20加厚艾卡垫带</option>
+            <option>700/650R16艾卡垫带</option>
+            <option>1100/1200R20安基垫带</option>
+            <option>900/1000R20安基垫带</option>
+            <option>900/1000R20胎垫</option>
+            <option>1100/1200R20胎垫</option>
+            <option>750/825R16胎垫</option>
+            <option>1200R20丁基内胎</option>
+            <option>1100R20丁基内胎</option>
+            <option>1000R20丁基内胎</option>
+            <option>900R20丁基内胎</option>
+            <option>825R20丁基内胎</option>
+            <option>825R16丁基内胎</option>
+            <option>750R16丁基内胎</option>
+            <option>900/1000R20丁基内胎</option>
+            <option>750/825R16丁基内胎</option>
+            <option>700/650R16丁基内胎</option> 
+            <option>650/600R15丁基内胎</option> 
+          </datalist> 
+
           <input max="2" type="text" placeholder="单位" list="danwei"> 
+
+          <datalist id="danwei"> 
+            <option>个</option>
+            <option>桶</option>
+            <option>条</option>
+            <option>把</option>
+            <option>盒</option> 
+            <option>件</option> 
+            <option>卷</option> 
+            <option>包</option> 
+            <option>颗</option> 
+          </datalist> 
+          
           <input max="4" min="1" type="number" placeholder="数量">
           <input max="3" min="0.01" type="number" placeholder="单价" >
           <input type="text"placeholder="想告诉客户什么">
@@ -81,7 +85,7 @@
 
         <div data-role="main" class="ui-content" >
         
-          <div id="billTable">
+      <div id="billTable">
             <table data-role="table" class="ui-responsive" data-mode="columntoggle" data-column-btn-text="">
               <thead>
                   <tr>
@@ -108,7 +112,7 @@
                   <h3 id="isum">￥:0.00</h3>
               </div>     
         </div>
-          </div>        
+      </div>        
         </div> 
 
 
