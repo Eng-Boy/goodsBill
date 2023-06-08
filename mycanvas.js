@@ -1,10 +1,9 @@
 let nowDate =new Date();
 // console.log(nowDate.getFullYear()+'年'+(nowDate.getMonth()+1)+'月'+nowDate.getDate()+'日');
 let titleDate = nowDate.getFullYear()+'年'+(nowDate.getMonth()+1)+'月'+nowDate.getDate()+'日'
-let customer = '顾客名称：'
+let customer = "顾客名称：" +$("#customer").val();
+
 let titleKey = '0000001'
-
-
 function canvasMoney(money){
     money = money.toString(); //转换为字符串
     //如果没有小数  
@@ -59,11 +58,21 @@ function upTable(ctx,headerHeight){
 }
 
 function draw(){
+    //传入no号并初始化
+    let h1number = $("#createBill .ui-header h1").html().split("-");
+    titleKey = h1number[0]
+    for(;titleKey.length<7;){
+    //要变成7位数
+    titleKey='0'+titleKey;
+    }
+
+
     //读取数据
     let todoarr = load('newbill');
     let sum = {a:0,b:''};
     // ccs中canvas的高
-    let canvasHeight = 175+todoarr.length*25;
+    // let canvasHeight = 175+todoarr.length*25;
+    let canvasHeight = 195+todoarr.length*25;
 
     let canvas = document.getElementById('tutorial');
     if (!canvas.getContext) return;
@@ -185,23 +194,27 @@ function draw(){
     ctx.fillText(sum.b,360,headerHeight+(todoarr.length)*50+65)
     ctx.fillText('￥'+sum.a,870,headerHeight+(todoarr.length)*50+65)
 
-    ctx.fillText('单位盖章',100,headerHeight+(todoarr.length)*50+110)
-    ctx.fillText('收款人',500,headerHeight+(todoarr.length)*50+110)
-    ctx.fillText('开票人 谢',780,headerHeight+(todoarr.length)*50+110)
+    ctx.fillText('单位盖章',100,headerHeight+(todoarr.length)*50+120)
+    ctx.fillText('收款人：谢',500,headerHeight+(todoarr.length)*50+120)
+    ctx.fillText('开票人：谢',780,headerHeight+(todoarr.length)*50+120)
+    ctx.fillText('联系电话：13690768887',100,headerHeight+(todoarr.length)*50+160)
+    ctx.fillText('地址：顺德区容桂街道凯南名都南门',500,headerHeight+(todoarr.length)*50+160)
     $("#tutorial").after('<img id="imgCanvas" src="' + canvas.toDataURL("image/png") + '" width="'+window.innerWidth+'">')
     // canvas.style.height = window.innerWidth/600*canvasHeight+'px';//为什么不加px会有诡异的现象
     // canvas.style.width = window.innerWidth+'px'; 
 
+   
 }
 function drawOrBack(){
     
     if ($("#btCanvas").text()=="开票") {
-        $("#btCanvas").text("返回")
+        customer = "顾客名称：" +$("#customer").val();
+        $("#btCanvas").text("编辑")
         $("#billTable").css("display","none")
         $("#billTable").after(' <canvas id="tutorial" width="1200px" height="600px" style=" width: 600px; height: 300px;  " >暂不支持</canvas>');
         draw()
         $("#tutorial").css("display","none")
-        $("#btCanvas").after('<a href="#bill"  class="ui-btn" id = "screenshot" onclick = "saveCanvas() ">保存</a>')
+        // $("#btCanvas").after('<a href="#bill"  class="ui-btn" id = "screenshot" onclick = "saveCanvas() ">保存</a>')
        
     } else  {
         $("#btCanvas").text("开票")

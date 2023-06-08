@@ -8,7 +8,7 @@
 <script src="./main/jquery.mobile-1.4.5.min.js"></script>
 </head>
 <body>
-    <!-- <div data-role="page" id="bill">
+    <div data-role="page" id="bill">
         <div data-role="header">
         <h1>票据</h1> 
         </div>
@@ -16,17 +16,17 @@
         <div data-role="content">
         <a href="#createBill" data-role="button" onclick="delBoxAll()">新建票据</a>
         <p>票据列表</p>
-        <ul data-role="listview" data-inset="true">
+        <ul data-role="listview" data-inset="true" id="billList">
+          <!-- <li><a href="#">日期 总金额 客户名</a></li>
           <li><a href="#">日期 总金额 客户名</a></li>
-          <li><a href="#">日期 总金额 客户名</a></li>
-          <li><a href="#">日期 总金额 客户名</a></li>
+          <li><a href="#">日期 总金额 客户名</a></li> -->
         </ul>
         </div>
       
         <div data-role="footer" style="text-align:center;" data-position="fixed">
         
         </div>
-    </div> -->
+    </div>
 
     <div data-role="page" id="createBill">
         <div data-role="header">
@@ -79,13 +79,21 @@
           
           <input max="4" min="1" type="number" placeholder="数量">
           <input max="3" min="0.01" type="number" placeholder="单价" >
-          <input type="text"placeholder="想告诉客户什么">
-          <button onclick="btadd()">添加</button>
+          <input type="text"placeholder="想告诉客户什么" list="note">
+          <datalist id="note">
+            <option value="打折"></option>
+            <option value="特惠"></option>
+            <option value="促销"></option>
+            <option value="缺货"></option>
+            <option value="马上涨价"></option>
+          </datalist>
+          <button onclick="btadd()" id="goodsidea">添加</button>
         </div>
 
         <div data-role="main" class="ui-content" >
         
       <div id="billTable">
+        <input type="text"placeholder="客户名称" id="customer">
             <table data-role="table" class="ui-responsive" data-mode="columntoggle" data-column-btn-text="">
               <thead>
                   <tr>
@@ -118,9 +126,9 @@
 
 
         <div data-role="footer" data-position="fixed">
-        <!-- <a href="#bill"  class="ui-btn  ">返回</a> -->
-        <a href="#"  class="ui-btn" onclick="delBoxAll()">清空</a>
-        <!-- <a href="#bill"  class="ui-btn ">完成</a> -->
+        <a href="#bill"  class="ui-btn " id="btBack">返回</a>
+        <!-- <a href="#"  class="ui-btn" id="btDel" onclick="delBoxAll()">清空</a> -->
+        <a href="#bill"  class="ui-btn " onclick="saveBillList()">完成</a>
         <a href="#"  class="ui-btn " onclick="drawOrBack()" id="btCanvas">开票</a>
         </div>
 
@@ -130,4 +138,4 @@
 <script src="./up_china_number.js"></script>
 <script src="./index.js"></script>
 <script src="./mycanvas.js"></script>
-</html>
+  </html>
